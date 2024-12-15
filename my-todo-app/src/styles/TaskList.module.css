@@ -1,0 +1,115 @@
+.taskList {
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+
+    .taskList__inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      text-align-last: left;
+      gap: 20px;
+
+      .task {
+        max-width: 380px;
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        overflow: hidden;
+        padding: 20px;
+        border: 2px solid rgba(28, 29, 34, 0.1);
+        border-radius: 15px;
+        gap: 15px;
+        position: relative;
+
+        .link_after::after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          z-index: 999;
+        }
+
+        .task_inner {
+          width: 100%;
+          height: auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .task_title {
+            font-size: 16px;
+            font-weight: 700;
+          }
+
+          .task_edit {
+            width: 26px;
+            height: 26px;
+            background-color: #fff;
+            border: 2px solid rgba(28, 29, 34, 0.125);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+            border-radius: 50%;
+            .task_edit_icon {
+              width: 14px;
+              height: 14px;
+            }
+          }
+        }
+
+        .task_description {
+          font-size: 14px;
+          margin-bottom: 10px;
+          color: rgba(28, 29, 34, 0.5);
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 3; /* number of lines to show */
+          line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+
+        .task_bottom {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          height: auto;
+
+          .startDate {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: rgba(136, 141, 167, 0.1);
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #888da7;
+          }
+
+          .status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 15px;
+          }
+        }
+      }
+    }
+  }
+}

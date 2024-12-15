@@ -1,0 +1,33 @@
+.header {
+    background-color: #fff;
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #e0e0e0;
+    
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        max-width: 1200px;
+        margin: 0 auto;
+
+        .title {
+            font-size: 32px;
+        }
+
+        .btn__primary {
+            background-color: #1c1d22;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: #2c2d32;
+            }
+        }
+    }
+}
