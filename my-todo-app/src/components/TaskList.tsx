@@ -9,7 +9,7 @@ interface TaskListProps {
 }
 
 const TaskList = async ({ tasks }: TaskListProps) => {
-  const data = await tasks; // Await the promise here
+  const data = await tasks;
 
   return (
     <div className={styles.taskList}>

@@ -78,3 +78,9 @@ a {
     height: 16px;
   }
 }
+
+.text_danger {
+  color: #ff4d4f;
+  text-align: center;
+  padding: 20px;
+}

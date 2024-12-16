@@ -18,10 +18,10 @@ export const Form = ({ task, type }: FormProps) => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const router = useRouter();
 
-  if (!task) return <p className="error">Task not Found</p>;
+  if (!task && type !== "create")
+    return <p className="error">Task not Found</p>;
 
-
-  const statuses = ["В плане", "В работе", "Завершено"];
+  const statuses = ["В плане", "В процессе", "Завершено"];
 
   const handleStatusSelect = (status: string) => {
     setStatus(status);
@@ -35,19 +35,20 @@ export const Form = ({ task, type }: FormProps) => {
     const description = (formData.get("description") as string)?.trim() || "";
     const startDate = (formData.get("startDate") as string)?.trim() || "";
     const dueDate = (formData.get("dueDate") as string)?.trim() || "";
-  
+
     const validationErrors: { [key: string]: string } = {};
     if (!title) validationErrors.title = "Название задачи обязательно.";
     if (!startDate) validationErrors.startDate = "Дата начала обязательна.";
     if (!status) validationErrors.status = "Статус обязателен.";
-  
+    if (!dueDate) validationErrors.dueDate = "Срок выполнения обязателен.";
+
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-  
+
     setErrors({});
-  
+
     const payload = {
       title,
       description: description || "",
@@ -55,11 +56,11 @@ export const Form = ({ task, type }: FormProps) => {
       dueDate: dueDate || null,
       status,
     };
-  
+
     try {
       let response;
-  
-      if (type === "edit" && task.id) {
+
+      if (type === "edit" && task?.id) {
         response = await fetch(`/api/tasks/${task.id}`, {
           method: "PUT",
           headers: {
@@ -76,11 +77,11 @@ export const Form = ({ task, type }: FormProps) => {
           body: JSON.stringify(payload),
         });
       }
-  
+
       if (!response || !response.ok) {
         throw new Error("Failed to save the task.");
       }
-  
+
       const result = await response.json();
       console.log("Task saved successfully:", result);
       router.push("/");
@@ -89,7 +90,24 @@ export const Form = ({ task, type }: FormProps) => {
       alert("Failed to save the task.");
     }
   };
-  
+
+  const handleDeleteBtn = () => {
+    fetch(`/api/tasks/${task?.id}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to delete the task.");
+        }
+
+        console.log("Task deleted successfully.");
+      })
+      .catch((error) => {
+        console.error("Error deleting the task:", error);
+        alert("Failed to delete the task.");
+      });
+    router.push("/");
+  };
 
   return (
     <form
@@ -105,7 +123,7 @@ export const Form = ({ task, type }: FormProps) => {
           id="title"
           name="title"
           className={styles.form__input}
-          defaultValue={task.title || ""}
+          defaultValue={task?.title || ""}
           disabled={type === "see"}
           required
         />
@@ -119,7 +137,7 @@ export const Form = ({ task, type }: FormProps) => {
           id="description"
           name="description"
           className={styles.form__textarea}
-          defaultValue={task.description || ""}
+          defaultValue={task?.description || ""}
           disabled={type === "see"}
         />
       </div>
@@ -133,7 +151,7 @@ export const Form = ({ task, type }: FormProps) => {
           name="startDate"
           className={styles.form__input}
           defaultValue={
-            task.startDate
+            task?.startDate
               ? new Date(task.startDate).toISOString().split("T")[0]
               : ""
           }
@@ -152,7 +170,7 @@ export const Form = ({ task, type }: FormProps) => {
           name="dueDate"
           className={styles.form__input}
           defaultValue={
-            task.dueDate
+            task?.dueDate
               ? new Date(task.dueDate).toISOString().split("T")[0]
               : ""
           }
@@ -189,7 +207,7 @@ export const Form = ({ task, type }: FormProps) => {
           </div>
           {errors.status && <p className={styles.error}>{errors.status}</p>}
         </div>
-        {type !== "see" && (
+        {type !== "see" ? (
           <div className={styles.form__group_item}>
             <p className={styles.form__label}>Отправить</p>
             <button
@@ -198,6 +216,18 @@ export const Form = ({ task, type }: FormProps) => {
             >
               <FontAwesomeIcon icon={faSave} />
               Сохранить
+            </button>
+          </div>
+        ) : (
+          <div className={styles.form__group_item}>
+            <p className={styles.form__label}>Отправить</p>
+            <button
+              onClick={handleDeleteBtn}
+              type="button"
+              className={`${styles.form__input} ${styles.btn_primary} ${styles.btn_danger}`}
+            >
+              <FontAwesomeIcon icon={faSave} />
+              Удалить
             </button>
           </div>
         )}

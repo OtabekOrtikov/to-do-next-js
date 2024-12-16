@@ -5,6 +5,12 @@
   width: 100%;
   max-width: 400px;
 
+  .error {
+    color: #ff4d4f;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
   .form__group {
     display: flex;
     align-items: flex-start;
@@ -64,6 +70,14 @@
         &:hover {
             background-color: #f9c80e;
         }
+
+        &.btn_danger {
+            background-color: #ff4d4f;
+            color: #fff;
+            &:hover {
+                background-color: #ff3336;
+            }
+        }
     }
 
     .form__textarea {
@@ -84,6 +98,7 @@
       user-select: none;
       font-size: 16px;
       color: #333;
+      min-width: 130px;
       &:hover {
         border-color: #ffd000;
       }

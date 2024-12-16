@@ -1,6 +1,6 @@
 import { iTask } from "@/types/task";
 import { join } from "path";
-import { promises as fs } from "fs";
+import { promises as fs, stat } from "fs";
 
 const dataFilePath = join(process.cwd(), "src", "data", "tasks.json");
 
@@ -26,7 +26,8 @@ const createTask = async (
   title: string,
   startDate: string,
   description?: string,
-  dueDate?: string
+  dueDate?: string,
+  status?: string
 ): Promise<iTask> => {
   const tasks = await readTasks();
   const newID = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
@@ -36,7 +37,7 @@ const createTask = async (
     description: description,
     startDate: startDate,
     dueDate: dueDate,
-    status: "To Do",
+    status: status || "В плане",
   };
   tasks.push(newTask);
   await writeTasks(tasks);

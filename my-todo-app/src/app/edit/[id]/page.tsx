@@ -13,11 +13,10 @@ interface EditPageProps {
 }
 
 const EditPage = ({ params }: EditPageProps) => {
-  const [formType, setFormType] = useState<string>("see"); // Toggle between "see" and "edit"
+  const [formType, setFormType] = useState<string>("see"); 
   const [taskData, setTaskData] = useState<any>(null);
   const [taskId, setTaskId] = useState<number | null>(null);
 
-  // Resolve `params` and fetch the task ID
   useEffect(() => {
     const resolveParams = async () => {
       const resolvedParams = await params;
@@ -28,7 +27,6 @@ const EditPage = ({ params }: EditPageProps) => {
     resolveParams();
   }, [params]);
 
-  // Fetch the task data when `taskId` is resolved
   useEffect(() => {
     if (taskId !== null) {
       const fetchData = async () => {
@@ -55,7 +53,6 @@ const EditPage = ({ params }: EditPageProps) => {
     );
   }
 
-  // Toggle between "see" and "edit" modes
   const toggleFormType = () => {
     setFormType((prevType) => (prevType === "see" ? "edit" : "see"));
   };

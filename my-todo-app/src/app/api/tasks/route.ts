@@ -13,7 +13,7 @@ export const GET = async () => {
 
 
 export const POST = async (req: Request) => {
-  const { title, description, startDate, dueDate } = await req.json();
+  const { title, description, startDate, dueDate, status } = await req.json();
 
   if (!title || typeof title !== "string") {
     return NextResponse.json(
@@ -43,6 +43,6 @@ export const POST = async (req: Request) => {
     );
   }
 
-  const newTask = await createTask(title, startDate, description, dueDate);
+  const newTask = await createTask(title, startDate, description, dueDate, status);
   return NextResponse.json(newTask, { status: 201 });
 };

@@ -29,7 +29,6 @@ export const PUT = async (
 
   const { title, description, startDate, dueDate, status } = await req.json();
 
-  // If dueDate or startDate are provided, validate them
   if (
     dueDate !== undefined &&
     (typeof dueDate !== "string" || isNaN(new Date(dueDate).getTime()))

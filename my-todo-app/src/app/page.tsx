@@ -5,13 +5,14 @@ import { fetchTasks } from "@/service/service";
 
 export const dynamic = "force-dynamic";
 
-const MainPage = () => {
+const MainPage = async () => {
   const tasks: Promise<iTask[]> = fetchTasks();
+  const tasksArray = await fetchTasks();
 
   return (
     <>
       <Header />
-      <TaskList tasks={tasks} />
+      {tasksArray.length > 0 ? <TaskList tasks={tasks} /> : <p className="text_danger">Задачи не найдены</p>}
     </>
   );
 };
