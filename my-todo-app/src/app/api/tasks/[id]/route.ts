@@ -27,7 +27,7 @@ export const PUT = async (
     return NextResponse.json({ error: "Неправильный ID" }, { status: 400 });
   }
 
-  const { title, description, dueDate, startDate, status } = await req.json();
+  const { title, description, startDate, dueDate, status } = await req.json();
 
   // If dueDate or startDate are provided, validate them
   if (
@@ -48,8 +48,8 @@ export const PUT = async (
     id,
     title,
     description,
-    dueDate,
     startDate,
+    dueDate,
     status
   );
   if (!updated) {

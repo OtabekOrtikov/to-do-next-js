@@ -46,8 +46,8 @@ const createTask = async (
 const updateTask = async (
   id: number,
   title?: string,
-  startDate?: string,
   description?: string,
+  startDate?: string,
   dueDate?: string,
   status?: string
 ): Promise<iTask | null> => {

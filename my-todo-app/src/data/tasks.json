@@ -1,18 +1,18 @@
 [
   {
     "id": 1,
-    "title": "Test 1",
+    "title": "Test 3",
     "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus rem obcaecati neque eum, asperiores similique dolores perferendis corporis vitae quia.",
-    "startDate": "2023-01-01T00:00:00.000Z",
-    "dueDate": "2024-12-10T00:00:00.000Z",
+    "startDate": "2024-12-01",
+    "dueDate": "2024-12-10",
     "status": "В процессе"
   },
   {
     "id": 2,
     "title": "Test 2",
     "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe ab in debitis.",
-    "startDate": "2023-01-02T00:00:00.000Z",
-    "dueDate": "2024-12-10T00:00:00.000Z",
-    "status": "В плане"
+    "startDate": "2023-01-02",
+    "dueDate": "2025-01-03",
+    "status": "Завершено"
   }
 ]
