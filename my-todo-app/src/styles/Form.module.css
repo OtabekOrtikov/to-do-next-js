@@ -62,11 +62,6 @@
         font-size: 16px;
         font-weight: 500;
     
-        svg {
-            width: 16px;
-            height: 16px;
-        }
-    
         &:hover {
             background-color: #f9c80e;
         }

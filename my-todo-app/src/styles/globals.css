@@ -18,7 +18,10 @@ a {
   margin: 0 auto;
   padding: 10px;
 }
-
+.icon { 
+  width: 16px;
+  height: 16px;
+}
 .title {
   font-size: 2rem;
   margin: 1rem 0;
